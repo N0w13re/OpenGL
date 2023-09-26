@@ -19,16 +19,6 @@ Shader::~Shader()
     GLCall(glDeleteProgram(m_RendererID));
 }
 
-void Shader::Bind() const
-{
-    GLCall(glUseProgram(m_RendererID));
-}
-
-void Shader::Unbind() const
-{
-    GLCall(glUseProgram(0));
-}
-
 ShaderProgramSource Shader::ParseShader(const std::string& filepath)
 {
     std::ifstream stream(filepath);
@@ -99,6 +89,26 @@ unsigned int Shader::CreateShader(const std::string& vertexShader, const std::st
     glDeleteShader(fs);
 
     return program;
+}
+
+void Shader::Bind() const
+{
+    GLCall(glUseProgram(m_RendererID));
+}
+
+void Shader::Unbind() const
+{
+    GLCall(glUseProgram(0));
+}
+
+void Shader::SetUniform1i(const std::string& name, int value)
+{
+    GLCall(glUniform1i(GetUniformLocation(name), value));
+}
+
+void Shader::SetUniform1f(const std::string& name, float value)
+{
+    GLCall(glUniform1f(GetUniformLocation(name), value));
 }
 
 void Shader::SetUniform4f(const std::string& name, float v0, float v1, float v2, float v3)
