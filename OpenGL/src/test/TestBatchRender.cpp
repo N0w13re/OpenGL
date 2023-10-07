@@ -13,15 +13,15 @@ namespace test {
         m_Translation(200, 200, 0)
     {
         float positions[] = {
-            100.0f, 100.0f,
-            200.0f, 100.0f,
-            200.0f, 200.0f,
-            100.0f, 200.0f,
+            100.0f, 100.0f, 0.18f, 0.6f, 0.96f, 1.0f,
+            200.0f, 100.0f, 0.18f, 0.6f, 0.96f, 1.0f,
+            200.0f, 200.0f, 0.18f, 0.6f, 0.96f, 1.0f,
+            100.0f, 200.0f, 0.18f, 0.6f, 0.96f, 1.0f,
 
-            300.0f, 100.0f,
-            400.0f, 100.0f,
-            400.0f, 200.0f,
-            300.0f, 200.0f,
+            300.0f, 100.0f, 1.0f, 0.93f, 0.24f, 1.0f,
+            400.0f, 100.0f, 1.0f, 0.93f, 0.24f, 1.0f,
+            400.0f, 200.0f, 1.0f, 0.93f, 0.24f, 1.0f,
+            300.0f, 200.0f, 1.0f, 0.93f, 0.24f, 1.0f
         };
 
         unsigned int indices[] = {
@@ -31,16 +31,16 @@ namespace test {
 
         m_VAO = std::make_unique<VertexArray>();
 
-        m_VertexBuffer = std::make_unique<VertexBuffer>(positions, 8 * 2 * sizeof(float));
+        m_VertexBuffer = std::make_unique<VertexBuffer>(positions, 8 * 6 * sizeof(float));
         VertexBufferLayout layout;
         layout.Push<float>(2);
+        layout.Push<float>(4);
         m_VAO->AddBuffer(*m_VertexBuffer, layout);
 
         m_IndexBuffer = std::make_unique<IndexBuffer>(indices, 12);
 
         m_Shader = std::make_unique<Shader>("res/shaders/Batch.shader");
         m_Shader->Bind();
-        m_Shader->SetUniform4f("u_Color", 0.2f, 0.3f, 0.8f, 1.0f);
     }
 
     test::TestBatchRender::~TestBatchRender()
