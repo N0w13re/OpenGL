@@ -71,20 +71,13 @@ namespace test {
         GLCall(glClear(GL_COLOR_BUFFER_BIT));
 
         Renderer renderer;
-        {
-            m_Texture[0]->Bind();
-            glm::mat4 model = glm::translate(glm::mat4(1.0f), m_TranslationA);
-            glm::mat4 mvp = m_Proj * m_View * model;
-            m_Shader->SetUniformMat4f("u_MVP", mvp);
-            renderer.Draw(*m_VAO, *m_IndexBuffer, *m_Shader);
-        }
-        {
-            m_Texture[1]->Bind();
-            glm::mat4 model = glm::translate(glm::mat4(1.0f), m_TranslationB);
-            glm::mat4 mvp = m_Proj * m_View * model;
-            m_Shader->SetUniformMat4f("u_MVP", mvp);
-            renderer.Draw(*m_VAO, *m_IndexBuffer, *m_Shader);
-        }
+
+        m_Texture[0]->Bind(0);
+        m_Texture[1]->Bind(1);
+        glm::mat4 model = glm::translate(glm::mat4(1.0f), m_TranslationA);
+        glm::mat4 mvp = m_Proj * m_View * model;
+        m_Shader->SetUniformMat4f("u_MVP", mvp);
+        renderer.Draw(*m_VAO, *m_IndexBuffer, *m_Shader);
     }
 
     void test::TestBatchRender::OnImGuiRender()
