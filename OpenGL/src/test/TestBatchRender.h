@@ -7,6 +7,7 @@
 #include "Texture.h"
 
 #include <memory>
+#include <array>
 
 namespace test {
 
@@ -28,6 +29,7 @@ namespace test {
 
 		glm::mat4 m_Proj, m_View;
 		glm::vec3 m_TranslationA, m_TranslationB;
+		float m_Positions[2] = { 100.0f, 100.0f };
 	};
 
 }
